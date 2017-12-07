@@ -77,11 +77,13 @@ $(document).ready(function(){
 
 			var results = response.data;
 
-			var dataStill = response.images.fixed_width_still.url;
 
-			var dataAnimate = response.images.fixed_width.url;
 
 			for(var i = 0; i < results.length; i++) {
+
+				var dataStill = results[i].images.fixed_width_still.url;
+
+				var dataAnimate = results[i].images.fixed_width.url;				
 
 				if(results[i].rating !== "r" && results[i].rating !== "pg-13") {
 
@@ -90,7 +92,7 @@ $(document).ready(function(){
 					var rating = results[i].rating;
 
 					var paraTwo = $("<p id='rating'>").text("Rating: " + rating);
-				}
+				
 
 				var paraOne = $("<img>");
 
@@ -105,14 +107,17 @@ $(document).ready(function(){
 
 				$("#gifView").prepend(gifDiv);
 
-				
+				}
 			}
 		});
 
 	};
+
+	 $(document).on('click', '.userGifInput', displayGifs);
 	
+
 	displayButtons();
-	displayGifs();
+	
 	
 	
 });
