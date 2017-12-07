@@ -1,0 +1,41 @@
+* {
+
+}
+
+html {
+	background-color: grey;
+}
+
+body {
+
+}
+
+.container-fluid {
+	background-color: pink ;
+
+	margin-top: 30px;
+
+}
+
+#emptySpace {
+	background-color:grey;
+}
+
+#mainContentArea {
+	background-color:pink ;
+}
+
+#buttonsView {
+	background-color:pink ;
+}
+
+#gifsView {
+	background-color:pink ;
+}
+
+#searchBar {
+	background-color:pink ;
+}
+
+
+

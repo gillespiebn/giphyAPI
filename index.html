@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<title>Giphy API</title>
+
+<meta charset="utf-8">
+
+<!-- Bootstrap & CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+
+</head>
+<body>
+
+<div class="container-fluid">
+
+	<div = class="row">
+		<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+		
+		<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7" id="mainContentArea">
+
+			<!-- Row for the heading -->
+			<div class="row">
+				<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+					<h1>GIF Search</h1>
+				</div>
+
+				<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+			</div>
+			
+			<!-- Row for the rendered buttons -->
+			<div class="row">
+				<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10" id="buttonsView">
+					<!-- Rendered Buttons will get Dumped Here  -->
+		    		<!-- <div id="buttonsView"></div> -->
+
+		    	</div>
+
+				<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+			</div>
+
+			<!-- Row for dumpped GIFs -->
+			<div class="row">
+				<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-10" id="gifsView">
+					<!-- GIFs will Get Dumped Here -->
+		    		<!-- <div id="gifsView"></div> -->
+
+		    	
+				</div>
+
+				<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+			</div>
+			
+		</div>
+
+		<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2" id="searchBar">
+
+			<form id="gifForm">
+		      	<label for="gifInput"></label>
+		      	<input type="text" id="gifInput">
+		      	<br>
+
+		     	<!-- Button triggers new GIF to be added -->
+		     	<input id="addGif" type="submit" value="Search">
+			</form>
+
+		</div>
+
+		<div class="col-xs-0 col-sm-0 col-md-1 col-lg-1 col-xl-1" id="emptySpace"></div>
+
+	
+
+</body>
+
+
+<!-- Javascript, Jquery, Popper, & Bootstrap -->
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="assets/javascript/app.js"></script>
+</html>
