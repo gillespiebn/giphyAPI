@@ -4,7 +4,7 @@ console.log("Javascript file connected");
 
 $(document).ready(function(){
 
-	var topics =  ["dog", "cat"];
+	var topics =  ["dog", "cat", "fish", "horse", "bird", "gecko"];
 	
 
 	// This fucntion renders the buttons in the "buttonView" div
@@ -18,7 +18,7 @@ $(document).ready(function(){
 			var newButton = $('<button>');
 
 				// adds dataName attribute and userButton class
-				newButton.attr("gifDataName", topics[i]);
+				newButton.attr("data-name", topics[i]);
 
 				newButton.attr("class", "userGifInput");
 
@@ -48,91 +48,74 @@ $(document).ready(function(){
 			topics.push(gifInputValue);
 
 			displayButtons();
-
-			console.log(topics);
-			console.log(gifInputValue);
-				
+	
 	
 	}
 
 		
 	
-		$("button").on("click", function() {
+	var displayGifs = function() {
 
 			
-			var gifName = $(this).attr(gifDataName);
-			
-			
-			var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-				gifName + "&api_key=mFEGtsOymtfuyHCdDrEqclznuqq8vgg5&limit=10";
+		var gifName = $(this).data(name);
+		
+		
+		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+			gifName + "&api_key=mFEGtsOymtfuyHCdDrEqclznuqq8vgg5&limit=10";
+
+			console.log(queryURL);
+
+		$.ajax({
+			url: queryURL,
+			method: "GET"
+		})
+
+		.done(function(response){
+
+			console.log(queryURL);
+			console.log(response);
+
+			var results = response.data;
+
+			var dataStill = response.images.fixed_width_still.url;
+
+			var dataAnimate = response.images.fixed_width.url;
+
+			for(var i = 0; i < results.length; i++) {
+
+				if(results[i].rating !== "r" && results[i].rating !== "pg-13") {
+
+					var gifDiv = $("<div class='gifDrop'>");
+					
+					var rating = results[i].rating;
+
+					var paraTwo = $("<p id='rating'>").text("Rating: " + rating);
+				}
+
+				var paraOne = $("<img>");
+
+					paraOne.attr("src", dataStill);
+					paraOne.attr("dataAnimate", dataAnimate);
+					paraOne.attr("dataState", "still");
+					paraOne.attr("class", "generatedGif");
+					
+				gifDiv.append(paraOne);
+
+				gifDiv.append(paraTwo);
+
+				$("#gifView").prepend(gifDiv);
 
 				
-
-			$.ajax({
-				url: queryURL,
-				method: "GET"
-			})
-
-			.done(function(response){
-
-				console.log(queryURL);
-				console.log(response);
-
-				var results = response.data;
-
-				var dataStill = response.images.fixed_width_still.url;
-
-				var dataAnimate = response.images.fixed_width.url;
-
-				for(var i = 0; i < results.length; i++) {
-
-					if(results[i].rating !== "r" && results[i].rating !== "pg-13") {
-
-						var gifDiv = $("<div class='gifDrop'>");
-						
-						var rating = results[i].rating;
-
-						var paraTwo = $("<p id='rating'>").text("Rating: " + rating);
-					}
-
-					var paraOne = $("<img>");
-
-						paraOne.attr("src", dataStill);
-						paraOne.attr("dataAnimate", dataAnimate);
-						paraOne.attr("dataState", "still");
-						paraOne.attr("class", "generatedGif");
-						
-					gifDiv.prepend(paraOne);
-
-					gifDiv.append(paraTwo);
-
-					$("#gifsView").prepend(gifDiv);
-
-					
-				}
-			});
-
+			}
 		});
+
+	};
 	
 	displayButtons();
+	displayGifs();
 	
 	
 });
 
 
-// below are pulled codes from the classwork for reference
 
-// pausing gifs
-
- // $(".gif").on("click", function() {
- 
- //      var state = $(this).attr("data-state");
-  
- //      if (state === "still") {
- //        $(this).attr("src", $(this).attr("data-animate"));
- //        $(this).attr("data-state", "animate");
- //      } else {
- //        $(this).attr("src", $(this).attr("data-still"));
- //        $(this).attr("data-state", "still");
- //      }
- //    });
