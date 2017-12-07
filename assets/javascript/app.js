@@ -4,7 +4,7 @@ console.log("Javascript file connected");
 
 $(document).ready(function(){
 
-	var topics =  ["dog", "cat", ];
+	var topics =  ["dog", "cat"];
 	
 
 	// This fucntion renders the buttons in the "buttonView" div
@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 		$("#buttonsView").empty();
 		// This for loop creates buttons for each item in the topics array
-		for(var i = 0; i < topics.length ; i++){
+		for(var i = 0; i < topics.length; i++) {
 
 			// creates a button tag
 			var newButton = $('<button>');
@@ -20,13 +20,13 @@ $(document).ready(function(){
 				// adds dataName attribute and userButton class
 				newButton.attr("gifDataName", topics[i]);
 
-				newButton.attr("class", "userButton");
+				newButton.attr("class", "userGifInput");
 
 				// adds searched word to corresponding button
 				newButton.text(topics[i]);
 
 				console.log(topics);
-				console.log(newButton);
+				
 
 			$('#buttonsView').append(newButton);
 
@@ -41,6 +41,8 @@ $(document).ready(function(){
 
 	function submit() {
 
+			event.preventDefault();
+
 			var gifInputValue = $('#gifInput').val().trim();
 
 			topics.push(gifInputValue);
@@ -48,63 +50,77 @@ $(document).ready(function(){
 			displayButtons();
 
 			console.log(topics);
+			console.log(gifInputValue);
 				
 	
 	}
 
-	function displayGifs () {
+		
+	
+		$("button").on("click", function() {
 
-		var gifName = $(this).data("gifDataName");
+			
+			var gifName = $(this).attr(gifDataName);
+			
+			
+			var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+				gifName + "&api_key=mFEGtsOymtfuyHCdDrEqclznuqq8vgg5&limit=10";
 
-		var apiKey = "mFEGtsOymtfuyHCdDrEqclznuqq8vgg5";
-		var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gifName + "&api_key=" + apiKey;
+				
 
+			$.ajax({
+				url: queryURL,
+				method: "GET"
+			})
 
-		$.ajax({
-			url: queryURL,
-			method: "GET"
-		}).done(function(data){
+			.done(function(response){
 
-			for(var i = 0; i < 10; i++) {
+				console.log(queryURL);
+				console.log(response);
 
+				var results = response.data;
 
-				var dataStill = response.data.images.fixed_width_still.url;
+				var dataStill = response.images.fixed_width_still.url;
 
-				var dataAnimate = response.data.images.fixed_width.url;
+				var dataAnimate = response.images.fixed_width.url;
 
-				// var dataState = "";
+				for(var i = 0; i < results.length; i++) {
 
-				var gifDiv = $("<div class='gifDrop'>");
+					if(results[i].rating !== "r" && results[i].rating !== "pg-13") {
 
-				var paraOne = $("<img>").attr({
-					"src": dataStill,
-					"dataAnimate": dataAnimate,
-					"dataState": "still",
-					"class": "generatedGif"
-				});
+						var gifDiv = $("<div class='gifDrop'>");
+						
+						var rating = results[i].rating;
 
-				gifDiv.prepend(paraOne);
+						var paraTwo = $("<p id='rating'>").text("Rating: " + rating);
+					}
 
-				var rating = data.rating;
+					var paraOne = $("<img>");
 
-				var paraTwo = $("<p id='rating'>").text("Rating: " + rating);
+						paraOne.attr("src", dataStill);
+						paraOne.attr("dataAnimate", dataAnimate);
+						paraOne.attr("dataState", "still");
+						paraOne.attr("class", "generatedGif");
+						
+					gifDiv.prepend(paraOne);
 
-				gifDiv.append(paraTwo);
+					gifDiv.append(paraTwo);
 
-				$("#gifsView").prepend(gifDiv);
+					$("#gifsView").prepend(gifDiv);
 
-				console.log("Topics: " + topics[i]);
-			}
+					
+				}
+			});
+
 		});
-
-	};
-
+	
 	displayButtons();
-	displayGifs();
+	
+	
 });
 
 
-// below are pulled codes from the classwork
+// below are pulled codes from the classwork for reference
 
 // pausing gifs
 
@@ -120,11 +136,3 @@ $(document).ready(function(){
  //        $(this).attr("data-state", "still");
  //      }
  //    });
-
-
-
-
-
-
-// var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5");
-// xhr.done(function(data) { console.log("success got data", data); });
