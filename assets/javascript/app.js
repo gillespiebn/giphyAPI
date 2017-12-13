@@ -105,10 +105,17 @@ $(document).ready(function(){
 				gifDiv.append(paraTwo);
 
 				$("#gifView").prepend(gifDiv);
-
+				
 				}
 
-				$(".gifDrop").on('click', function() {
+								
+			}
+
+
+
+		});
+
+		$(".gifDrop").on('click', function() {
 
 					var state = $(this).attr("dataState");
 
@@ -121,11 +128,9 @@ $(document).ready(function(){
 					}
 				});
 
-				
-			}
-		});
-
 	};
+
+
 
 	 $(document).on('click', '.userGifInput', displayGifs);
 	
